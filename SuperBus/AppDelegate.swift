@@ -10,30 +10,71 @@ import UIKit
 import CoreData
 import CoreLocation
 
+struct Bus {
+    let name:String
+    let proximityUUID:String
+    let identifier:String = "com.mycompany.myregion"
+    
+    let major:Int = 0
+    let minor:Int = 0
+    
+    var soundName:String{
+        return self.name + ".aiff"
+    }
+    
+    var alertBody:String{
+        return self.name + "公車到了"
+    }
+    
+}
+
+let buses:[Bus] = [
+    Bus(name: "241", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D"),
+    Bus(name: "795往野人谷", proximityUUID: "C26D9218-F004-4D66-9A56-4CCD405E16B6"),
+    Bus(name: "790漁港", proximityUUID: "FDA50693-A4E2-4FB1-AFCF-C6EB07647825")
+]
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let locationManager:CLLocationManager = CLLocationManager()
+    
     var window: UIWindow?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        self.locationManager.requestAlwaysAuthorization()
         
         let type = UIUserNotificationType.Alert | UIUserNotificationType.Sound
         let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
         application.registerUserNotificationSettings(setting)
         
-        let notification = UILocalNotification()
-        notification.alertBody = "241 公車到了"
-        notification.soundName = "241.aiff"
         
-        let UUID = NSUUID(UUIDString: "EE188576-DC99-4BB5-97A4-138C9DF7E51D")
-        let region = CLBeaconRegion(proximityUUID: UUID, identifier: "307")
-        notification.region = region
+        for bus in buses {
+            let notification = self.createBeaconDetecter(bus)
+            application.scheduleLocalNotification(notification)
+        }
         
-        application.scheduleLocalNotification(notification)
+        
         
         return true
     }
 
+    
+    func createBeaconDetecter(bus:Bus)->UILocalNotification{
+        
+        let notification = UILocalNotification()
+        notification.alertBody = bus.alertBody
+        notification.soundName = bus.soundName
+        
+        let UUID = NSUUID(UUIDString: bus.proximityUUID)
+        let region = CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
+        notification.region = region
+        
+        return notification
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
