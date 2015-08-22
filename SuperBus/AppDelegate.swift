@@ -8,15 +8,29 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let type = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+        let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
+        application.registerUserNotificationSettings(setting)
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "241 公車到了"
+        notification.soundName = "241.aiff"
+        
+        let UUID = NSUUID(UUIDString: "EE188576-DC99-4BB5-97A4-138C9DF7E51D")
+        let region = CLBeaconRegion(proximityUUID: UUID, identifier: "307")
+        notification.region = region
+        
+        application.scheduleLocalNotification(notification)
+        
         return true
     }
 
