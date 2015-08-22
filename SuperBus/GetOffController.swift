@@ -38,14 +38,14 @@ class GetOffController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 3
+        return stations311.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("busStop", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-
+        cell.textLabel?.text = stations311[indexPath.row]
         return cell
     }
     
