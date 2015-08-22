@@ -14,24 +14,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     var locationManager: CLLocationManager!
     
-    let uuid = NSUUID(UUIDString: "EE188576-DC99-4BB5-97A4-138C9DF7E51D")
-    let identifier = "com.mycompany.myregion"
+//    let uuid = NSUUID(UUIDString: "EE188576-DC99-4BB5-97A4-138C9DF7E51D")
+//    let identifier = "com.mycompany.myregion"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
+//        locationManager = CLLocationManager()
+//        locationManager.delegate = self
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let region = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
-        region.notifyOnEntry = true
-        region.notifyOnExit = true
-        //     region.notifyEntryStateOnDisplay = YES;
-        locationManager.startMonitoringForRegion(region)
-        locationManager.startRangingBeaconsInRegion(region)
+//        let region = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+//        region.notifyOnEntry = true
+//        region.notifyOnExit = true
+//        //     region.notifyEntryStateOnDisplay = YES;
+//        locationManager.startMonitoringForRegion(region)
+//        locationManager.startRangingBeaconsInRegion(region)
     }
     
     override func didReceiveMemoryWarning() {

@@ -26,6 +26,7 @@
 	<string>你好，我叫美佳，我要你的Location.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
