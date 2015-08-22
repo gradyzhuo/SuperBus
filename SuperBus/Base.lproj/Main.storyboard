@@ -33,7 +33,7 @@
                             <outlet property="delegate" destination="01q-C5-zdC" id="rIL-g6-fCC"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="等公車" id="BPz-5M-RGo"/>
+                    <tabBarItem key="tabBarItem" title="等公車" image="busstop" id="BPz-5M-RGo"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1aJ-YY-Woo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,7 +60,7 @@
                             <outlet property="delegate" destination="BML-ku-3Dl" id="URL-vU-TR1"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="下車鈴" id="Cu4-S4-k1h"/>
+                    <tabBarItem key="tabBarItem" title="下車鈴" image="busdriver" id="Cu4-S4-k1h"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T58-Mu-sNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -86,4 +86,8 @@
             <point key="canvasLocation" x="-884" y="541"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="busdriver" width="44" height="44"/>
+        <image name="busstop" width="44" height="44"/>
+    </resources>
 </document>
