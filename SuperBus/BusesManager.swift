@@ -74,6 +74,7 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
         
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
             
+            //給美佳要求location的權限
             let authorizationDescription = NSBundle.mainBundle().infoDictionary?["NSLocationAlwaysUsageDescription"] as? String
             
             let speech = AVSpeechSynthesizer()
@@ -127,6 +128,11 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
             notification.soundName = bus.soundName
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
+        
+        let speech = AVSpeechSynthesizer()
+        let utterace = AVSpeechUtterance(string: "機車勒")
+        utterace.rate = 0.3
+        speech.speakUtterance(utterace)
         
     }
     

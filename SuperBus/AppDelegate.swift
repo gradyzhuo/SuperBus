@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         let buses:[String:Bus] = [
-            "241":Bus(name: "241", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", description: "241-Ray的"),
-            "795往野人谷":Bus(name: "795往野人谷", proximityUUID: "C26D9218-F004-4D66-9A56-4CCD405E16B6", description: "795往野人谷-我的"),
-            "790漁港":Bus(name: "790漁港", proximityUUID: "FDA50693-A4E2-4FB1-AFCF-C6EB07647825", description: "790漁港-USB的")
+            "311":Bus(name: "311", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", description: "311-Ray的"),
+            "綠13":Bus(name: "綠13", proximityUUID: "C26D9218-F004-4D66-9A56-4CCD405E16B6", description: "綠13-我的"),
+            "109":Bus(name: "109", proximityUUID: "FDA50693-A4E2-4FB1-AFCF-C6EB07647825", description: "109-USB的")
         ]
         
         for (key, value) in buses {
