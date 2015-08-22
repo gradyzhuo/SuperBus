@@ -643,6 +643,7 @@
 		79998E921B872B0A00B1080E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79998E911B872B0A00B1080E /* Images.xcassets */; };
 		79998E951B872B0A00B1080E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79998E931B872B0A00B1080E /* LaunchScreen.xib */; };
 		79998EA11B872B0B00B1080E /* SuperBusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79998EA01B872B0B00B1080E /* SuperBusTests.swift */; };
+		79E47CB71B88A0E80080E2B8 /* BusesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E47CB61B88A0E80080E2B8 /* BusesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1295,6 +1296,7 @@
 		79998E9A1B872B0B00B1080E /* SuperBusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperBusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79998E9F1B872B0B00B1080E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79998EA01B872B0B00B1080E /* SuperBusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperBusTests.swift; sourceTree = "<group>"; };
+		79E47CB61B88A0E80080E2B8 /* BusesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1960,6 +1962,7 @@
 				79998E911B872B0A00B1080E /* Images.xcassets */,
 				79998E931B872B0A00B1080E /* LaunchScreen.xib */,
 				79998E8A1B872B0A00B1080E /* SuperBus.xcdatamodeld */,
+				79E47CB61B88A0E80080E2B8 /* BusesManager.swift */,
 				79998E861B872B0A00B1080E /* Supporting Files */,
 			);
 			path = SuperBus;
@@ -2746,6 +2749,7 @@
 			files = (
 				79998E8D1B872B0A00B1080E /* ViewController.swift in Sources */,
 				79998E8B1B872B0A00B1080E /* SuperBus.xcdatamodeld in Sources */,
+				79E47CB71B88A0E80080E2B8 /* BusesManager.swift in Sources */,
 				79998E891B872B0A00B1080E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

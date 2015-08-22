@@ -8,54 +8,9 @@
 
 import UIKit
 import CoreData
-import CoreLocation
-
-struct Bus {
-    let name:String
-    let proximityUUID:String
-    
-    var identifier:String {
-        return self.name
-    }
-    
-    let major:Int = 1
-    let minor:Int = 1
-    
-    var soundName:String{
-        return self.name + ".aiff"
-    }
-    
-    var alertBody:String{
-        return self.name + "公車到了"
-    }
-    
-}
-
-let buses:[String:Bus] = [
-    "241":Bus(name: "241", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D"),
-    "795往野人谷":Bus(name: "795往野人谷", proximityUUID: "C26D9218-F004-4D66-9A56-4CCD405E16B6"),
-    "790漁港":Bus(name: "790漁港", proximityUUID: "FDA50693-A4E2-4FB1-AFCF-C6EB07647825")
-]
-
-extension CLRegionState : Printable {
-    
-    public var description:String{
-        switch self{
-        case .Unknown:
-            return "Unknow"
-        case .Inside:
-            return "Inside"
-        case .Outside:
-            return "Outside"
-        }
-    }
-}
-
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
-
-    let locationManager:CLLocationManager = CLLocationManager()
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -64,85 +19,72 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let type = UIUserNotificationType.Alert | UIUserNotificationType.Sound
         let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
         application.registerUserNotificationSettings(setting)
+
         
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.delegate = self
+        let buses:[String:Bus] = [
+            "241":Bus(name: "241", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", description: "241-Ray的"),
+            "795往野人谷":Bus(name: "795往野人谷", proximityUUID: "C26D9218-F004-4D66-9A56-4CCD405E16B6", description: "795往野人谷-我的"),
+            "790漁港":Bus(name: "790漁港", proximityUUID: "FDA50693-A4E2-4FB1-AFCF-C6EB07647825", description: "790漁港-USB的")
+        ]
         
-        
-        self.register()
+        for (key, value) in buses {
+            BusesManager.sharedInstance.detectBeaconRegionWithBus(value)
+        }
         
         return true
     }
 
-    func register(){
-        
-        for (key, value) in buses {
-            self.createBeaconDetecter(value)
-        }
-        
-//        let notifications = buses.map{ return self.createBeaconDetecter($0) }
-//        UIApplication.sharedApplication().scheduledLocalNotifications = notifications
-    }
-    
-    func createBeaconDetecter(bus:Bus){
-        
-        let UUID = NSUUID(UUIDString: bus.proximityUUID)
-        let region = CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
-        region.notifyEntryStateOnDisplay = true
-        
-        self.locationManager.pausesLocationUpdatesAutomatically = false
-        self.locationManager.startMonitoringForRegion(region)
-        self.locationManager.startRangingBeaconsInRegion(region)
-    }
-    
-    
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-        
-        println("beacons.count:\(beacons.count)")
-        
-    }
-    
-    
-    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
-        println("region:\(region.identifier)")
-        
-        if let bus = buses[region.identifier] {
-            let notification = UILocalNotification()
-            notification.alertBody = bus.alertBody
-            notification.soundName = bus.soundName
-            
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-        }
-        
-    }
-    
-    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
-        
-        if state == .Outside || state == .Unknown {
-            return
-        }
-        
-        if let bus = buses[region.identifier] {
-            let notification = UILocalNotification()
-            notification.alertBody = bus.alertBody
-            notification.soundName = bus.soundName
-            
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-        }
-        
-        
-        
-    }
-    
-    
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
-        completionHandler()
-    }
-    
-    
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        completionHandler(UIBackgroundFetchResult.NoData)
-    }
+//    func register(){
+//        
+//        for (key, value) in buses {
+//            self.detectBeaconRegionWithBus(value)
+//        }
+//        
+//    }
+//    
+//    func detectBeaconRegionWithBus(bus:Bus){
+//        
+//        let UUID = NSUUID(UUIDString: bus.proximityUUID)
+//        let region = CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
+//        region.notifyEntryStateOnDisplay = true
+//        
+//        self.locationManager.startMonitoringForRegion(region)
+//        self.locationManager.startRangingBeaconsInRegion(region)
+//    }
+//    
+//    
+//    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+//        //
+//    }
+//    
+//    
+//    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
+//        
+//        if let bus = buses[region.identifier] {
+//            let notification = UILocalNotification()
+//            notification.alertBody = bus.alertBody
+//            notification.soundName = bus.soundName
+//            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+//        }
+//        
+//        
+//        
+//    }
+//    
+//    func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
+//        
+//        if let bus = buses[region.identifier] {
+//            let notification = UILocalNotification()
+//            notification.alertBody = bus.name + "公車離開了"
+//            notification.soundName = bus.soundName
+//            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+//        }
+//    }
+//    
+//    
+//    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
+//        
+//    }
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -160,8 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-        self.register()
         
     }
 
