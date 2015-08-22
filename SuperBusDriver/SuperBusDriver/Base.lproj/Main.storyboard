@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--路線 311-->
+        <!--路線 311 (往松山)-->
         <scene sceneID="njd-1R-NEt">
             <objects>
                 <tableViewController id="aIr-YF-n76" customClass="DriverShowStopsTableViewController" customModule="SuperBusDriver" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,7 +37,7 @@
                             <outlet property="delegate" destination="aIr-YF-n76" id="IP4-ry-nNz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="路線 311" id="80z-gv-iDt"/>
+                    <navigationItem key="navigationItem" title="路線 311 (往松山)" id="80z-gv-iDt"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9tU-Uq-yEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

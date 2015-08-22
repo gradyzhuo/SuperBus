@@ -6,6 +6,7 @@ use_frameworks!
 target 'SuperBusDriver' do
 
 pod 'Alamofire'
+pod 'MBProgressHUD', '~> 0.9'
 
 end
 

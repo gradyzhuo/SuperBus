@@ -11,7 +11,12 @@ import Alamofire
 
 struct Stop : Equatable {
     let name:String
-    var stop:Bool = false
+    var stop:Bool
+    
+    init(name:String, stop:Bool = false){
+        self.name = name
+        self.stop = stop
+    }
 }
 
 func ==(lhs: Stop, rhs: Stop)->Bool{
@@ -45,12 +50,7 @@ struct Bus : Printable {
         self.soundName = soundName ?? "\(name).aiff"
         self.identifier = name
         self.description = description ?? name
-        self.stops = stops
         
-    }
-    
-    
-    mutating func updateStops(stops:[Stop]){
         self.stops = stops
     }
     
@@ -60,37 +60,55 @@ struct Bus : Printable {
 class DriverShowStopsTableViewController: UITableViewController {
 
     var currentBus:Bus!
-    var stopsToStop:[Stop] = []
+    var stopNamesToStop:[String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let stopNames:[String] = ["中和高中", "連城路", "台貿一村"]
-        let stops:[Stop] = stopNames.map{ return Stop(name: $0, stop: true) }
+        let stopNames:[String] = ["中和高中","連城路","連城中正路口","連城錦和路口","台貿一村","連城板南路","連城景平路","泰和街中和廟口","中和派出所","南山高中","雙和里","華泰新城","宜安路","宜安吉立智光商職","中興二村","中興新村","得和路口","永和國小","金銀大廈","福和里","福和路","永福橋頭","自來水博物館(太子學舍)","三軍總醫院","耕莘文教院","台電大樓","臺大臺大綜合體育館","龍安國小(公務人力發展中心)","金華新生路口","信義新生路口","幸安國小","仁愛建國路口(一)","仁愛建國路口(二)","仁愛大安路口","仁愛敦化路口","仁愛安和路口","仁愛國泰醫院","仁愛延吉街口","仁愛光復路口","國父紀念館市政府(市府)","松山高中(基隆路)","基隆路口","饒河街觀光夜市(八德)","松山農會","松山車站","松山橋頭","松山車站(八德)","松山農會","饒河街觀光夜市(八德)","基隆路口二松山高中(基隆路)","市政府(市府)","國父紀念館","仁愛光復路口","仁愛延吉街口","仁愛國泰醫院","仁愛安和路口","仁愛敦化路口","仁愛復興路口","仁愛建國路口","一信義新生路口","金華新生路口","和平新生路口","龍安國小(公務人力發展中心)","臺大綜合體育館","臺大捷運公館站","福和橋","福和國中","永利路","金銀大廈","永和國小","得和路口","中興新村","中興二村","智光商職","宜安吉立","宜安路","華泰新城","雙和里南山高中","中和派出所","中和廟口","泰和街","連城景平路","連城板南路","台貿一村","連城錦和路口","連城中正路口","連城路","中和高中"]
+        let stops:[Stop] = stopNames.map{ return Stop(name: $0) }
         var bus311 = Bus(name: "311", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", stops: stops)
         self.currentBus = bus311
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-//        Alamofire.request(.POST, "http://www.google.com", parameters: ["UUID":currentBus.proximityUUID], encoding: ParameterEncoding.PropertyList(NSPropertyListFormat.BinaryFormat_v1_0, 0), headers: nil).responseJSON(options: NSJSONReadingOptions.MutableLeaves) {[unowned self] (request, response, json, error) -> Void in
+        self.reloadStopData()
+    }
+
+    
+    func reloadStopData(){
+        let url = NSURL(string: "http://52.25.36.29/rest/bus/\(self.currentBus.proximityUUID)/stops")
+        println("url:\(url)")
+        
+        let dataTask = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+            
+            var error:NSError?
+            let json:AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &error)
+            let stopNames:[String] = (json as? [String]) ?? []
+            self.stopNamesToStop = stopNames
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                self.tableView.reloadData()
+                
+            })
+            
+        })
+        
+        dataTask.resume()
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC * 2)), dispatch_get_main_queue(), { () -> Void in
+            self.reloadStopData()
+        })
+        
+//        Alamofire.request(.GET, url!).responseJSON(options: NSJSONReadingOptions.AllowFragments) {[unowned self] (request, response, json, error) -> Void in
 //            
-//            let stopNames:[String] = json as! [String]
-//            self.stops = stopNames.map{ return Stop(name: $0, bus: currentBus) }
 //            
-//            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
-//                self.tableView.reloadData()
-//            })
 //            
 //        }
         
-        self.tableView.reloadData()
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -109,7 +127,6 @@ class DriverShowStopsTableViewController: UITableViewController {
         // Return the number of rows in the section.
         return self.currentBus.stops.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("stop", forIndexPath: indexPath) as! UITableViewCell
@@ -119,10 +136,9 @@ class DriverShowStopsTableViewController: UITableViewController {
         cell.textLabel?.text = stop.name
         
         cell.accessoryView = nil
-        if stop.stop {
+        if contains(self.stopNamesToStop, stop.name) {
             cell.accessoryView = UIImageView(image: UIImage(named: "stop"))
         }
-        
         
         return cell
     }
