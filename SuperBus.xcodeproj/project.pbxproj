@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71B94D301B88AB3D00BD6D37 /* BusListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */; };
+		71B94D321B88AB8D00BD6D37 /* GetOffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B94D311B88AB8D00BD6D37 /* GetOffController.swift */; };
 		792BA3361B885DB200F59D43 /* 201.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 792BA0C11B885DAF00F59D43 /* 201.aiff */; };
 		792BA3371B885DB200F59D43 /* 231.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 792BA0C21B885DAF00F59D43 /* 231.aiff */; };
 		792BA3381B885DB200F59D43 /* 241.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 792BA0C31B885DAF00F59D43 /* 241.aiff */; };
@@ -656,6 +658,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusListController.swift; sourceTree = "<group>"; };
+		71B94D311B88AB8D00BD6D37 /* GetOffController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetOffController.swift; sourceTree = "<group>"; };
 		792BA0C11B885DAF00F59D43 /* 201.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 201.aiff; sourceTree = "<group>"; };
 		792BA0C21B885DAF00F59D43 /* 231.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 231.aiff; sourceTree = "<group>"; };
 		792BA0C31B885DAF00F59D43 /* 241.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 241.aiff; sourceTree = "<group>"; };
@@ -1956,6 +1960,8 @@
 			children = (
 				79998E881B872B0A00B1080E /* AppDelegate.swift */,
 				79998E8C1B872B0A00B1080E /* ViewController.swift */,
+				71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */,
+				71B94D311B88AB8D00BD6D37 /* GetOffController.swift */,
 				79998E8E1B872B0A00B1080E /* Main.storyboard */,
 				79998E911B872B0A00B1080E /* Images.xcassets */,
 				79998E931B872B0A00B1080E /* LaunchScreen.xib */,
@@ -2744,9 +2750,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71B94D301B88AB3D00BD6D37 /* BusListController.swift in Sources */,
 				79998E8D1B872B0A00B1080E /* ViewController.swift in Sources */,
 				79998E8B1B872B0A00B1080E /* SuperBus.xcdatamodeld in Sources */,
 				79998E891B872B0A00B1080E /* AppDelegate.swift in Sources */,
+				71B94D321B88AB8D00BD6D37 /* GetOffController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

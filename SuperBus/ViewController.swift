@@ -10,9 +10,10 @@ import UIKit
 import CoreBluetooth
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UITableViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     var locationManager: CLLocationManager!
+    
     
 //    let uuid = NSUUID(UUIDString: "EE188576-DC99-4BB5-97A4-138C9DF7E51D")
 //    let identifier = "com.mycompany.myregion"
@@ -39,7 +40,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    
     // delegates
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!)
