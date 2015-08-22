@@ -15,8 +15,8 @@ struct Bus {
     let proximityUUID:String
     let identifier:String = "com.mycompany.myregion"
     
-    let major:Int = 0
-    let minor:Int = 0
+    let major:Int = 1
+    let minor:Int = 1
     
     var soundName:String{
         return self.name + ".aiff"
@@ -36,7 +36,7 @@ let buses:[Bus] = [
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     let locationManager:CLLocationManager = CLLocationManager()
     
@@ -44,23 +44,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        self.locationManager.requestAlwaysAuthorization()
+        
         
         let type = UIUserNotificationType.Alert | UIUserNotificationType.Sound
         let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
         application.registerUserNotificationSettings(setting)
         
-        
-        for bus in buses {
-            let notification = self.createBeaconDetecter(bus)
-            application.scheduleLocalNotification(notification)
-        }
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.delegate = self
         
         
+        self.register()
         
         return true
     }
 
+    func register(){
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+        for bus in buses {
+            let notification = self.createBeaconDetecter(bus)
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+    }
     
     func createBeaconDetecter(bus:Bus)->UILocalNotification{
         
@@ -70,10 +77,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let UUID = NSUUID(UUIDString: bus.proximityUUID)
         let region = CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
+        region.notifyOnExit = false
+        region.notifyEntryStateOnDisplay = true
         notification.region = region
+        
+        self.locationManager.startRangingBeaconsInRegion(region)
         
         return notification
     }
+    
+    
+    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+        
+//        UIAlertView(title: "Hi", message: nil, delegate: nil, cancelButtonTitle: "OK").show()
+//        println("here proximity:\(regi)")
+        println("beacons.count:\(beacons.count)")
+        
+    }
+    
+    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
+        UIAlertView(title: "state:\(state.rawValue)", message: nil, delegate: nil, cancelButtonTitle: "OK").show()
+        
+    }
+    
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -91,6 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        self.register()
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
