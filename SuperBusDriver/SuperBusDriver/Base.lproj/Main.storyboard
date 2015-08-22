@@ -4,11 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--路線 311 (往松山)-->
+        <!--路線 311-->
         <scene sceneID="njd-1R-NEt">
             <objects>
                 <tableViewController id="aIr-YF-n76" customClass="DriverShowStopsTableViewController" customModule="SuperBusDriver" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rmE-5Q-Cgb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rmE-5Q-Cgb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -37,7 +37,13 @@
                             <outlet property="delegate" destination="aIr-YF-n76" id="IP4-ry-nNz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="路線 311 (往松山)" id="80z-gv-iDt"/>
+                    <navigationItem key="navigationItem" title="路線 311" id="80z-gv-iDt">
+                        <barButtonItem key="rightBarButtonItem" title="Clear All" id="cr3-4d-lcp">
+                            <connections>
+                                <action selector="clearAll:" destination="aIr-YF-n76" id="BD6-zc-Sxj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9tU-Uq-yEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

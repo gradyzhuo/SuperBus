@@ -8,6 +8,13 @@
 
 import UIKit
 import Alamofire
+import MBProgressHUD
+
+
+class StopButton : UIButton {
+    var stop:Stop!
+    
+}
 
 struct Stop : Equatable {
     let name:String
@@ -62,6 +69,7 @@ class DriverShowStopsTableViewController: UITableViewController {
     var currentBus:Bus!
     var stopNamesToStop:[String] = []
     
+    var HUD:MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +80,49 @@ class DriverShowStopsTableViewController: UITableViewController {
         self.currentBus = bus311
         
         
-        self.reloadStopData()
+        self.HUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
+        self.reloadStopData { () -> Void in
+            self.HUD?.hide(true)
+        }
     }
-
     
-    func reloadStopData(){
+    
+    func deleteStop(sender:AnyObject){
+        
+        let button = sender as! StopButton
+        let stop = button.stop
+        
+        Alamofire.request(.DELETE, "http://52.25.36.29/rest/bus/\(self.currentBus.proximityUUID)/stops", parameters: ["stops":stop.name]).response { (request, response, data, error) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if let data = data {
+                    var error:NSError?
+                    let json:AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &error)
+                    let stopNames:[String] = (json as? [String]) ?? []
+                    self.stopNamesToStop = stopNames
+                    
+                    self.tableView.reloadData()
+                }
+                
+            })
+            
+        }
+        
+    }
+    
+    func clear(){
+        
+        self.stopNamesToStop = []
+        self.tableView.reloadData()
+        
+        Alamofire.request(.DELETE, "http://52.25.36.29/rest/bus")
+        
+    }
+    
+    func reloadStopData(completion:(()->Void)? = nil){
         let url = NSURL(string: "http://52.25.36.29/rest/bus/\(self.currentBus.proximityUUID)/stops")
-        println("url:\(url)")
         
         let dataTask = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
             
@@ -89,6 +133,7 @@ class DriverShowStopsTableViewController: UITableViewController {
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
+                completion?()
                 self.tableView.reloadData()
                 
             })
@@ -100,13 +145,12 @@ class DriverShowStopsTableViewController: UITableViewController {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC * 2)), dispatch_get_main_queue(), { () -> Void in
             self.reloadStopData()
         })
-        
-//        Alamofire.request(.GET, url!).responseJSON(options: NSJSONReadingOptions.AllowFragments) {[unowned self] (request, response, json, error) -> Void in
-//            
-//            
-//            
-//        }
-        
+
+    }
+    
+    
+    @IBAction func clearAll(sender:AnyObject){
+        self.clear()
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,12 +181,18 @@ class DriverShowStopsTableViewController: UITableViewController {
         
         cell.accessoryView = nil
         if contains(self.stopNamesToStop, stop.name) {
-            cell.accessoryView = UIImageView(image: UIImage(named: "stop"))
+            let button = StopButton(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
+            button.stop = stop
+            button.setImage(UIImage(named: "stop"), forState: UIControlState.Normal)
+            button.addTarget(self, action: "deleteStop:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.accessoryView = button
         }
         
         return cell
     }
 
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
