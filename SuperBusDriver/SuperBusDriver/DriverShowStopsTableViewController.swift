@@ -7,9 +7,53 @@
 //
 
 import UIKit
+import Alamofire
+
+let bus311 = Bus(name: "311", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", description: "311-Ray的")
+
+
+struct Stop {
+    let name:String
+    let bus:Bus
+}
+
+struct Bus : Printable {
+    let name:String
+    let proximityUUID:String
+    let lowProximityUUID:String
+    let soundName:String
+    let identifier:String
+    
+    let major:Int = 1
+    let minor:Int = 1
+    
+    
+    var stops:[Stop] = []
+    
+    var alertBody:String{
+        return self.description + "公車到了"
+    }
+    
+    let description:String
+    
+    init(name: String, proximityUUID: String, lowProximityUUID:String? = nil, soundName: String? = nil, description:String? = nil){
+        
+        self.name = name
+        self.proximityUUID = proximityUUID
+        self.lowProximityUUID = lowProximityUUID ?? proximityUUID
+        self.soundName = soundName ?? "\(name).aiff"
+        self.identifier = name
+        self.description = description ?? name
+    }
+    
+}
+
 
 class DriverShowStopsTableViewController: UITableViewController {
 
+    let currentBus:Bus = bus311
+    var stops:[Stop] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +62,22 @@ class DriverShowStopsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+//        Alamofire.request(.POST, "http://www.google.com", parameters: ["UUID":currentBus.proximityUUID], encoding: ParameterEncoding.PropertyList(NSPropertyListFormat.BinaryFormat_v1_0, 0), headers: nil).responseJSON(options: NSJSONReadingOptions.MutableLeaves) {[unowned self] (request, response, json, error) -> Void in
+//            
+//            let stopNames:[String] = json as! [String]
+//            self.stops = stopNames.map{ return Stop(name: $0, bus: currentBus) }
+//            
+//            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
+//                self.tableView.reloadData()
+//            })
+//            
+//        }
+        
+        var stops = [Stop(name: "中和廟口", bus: currentBus)]
+        
+        self.tableView.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,24 +90,25 @@ class DriverShowStopsTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return self.stops.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("stop", forIndexPath: indexPath) as! UITableViewCell
+        
         // Configure the cell...
-
+        let stop = self.stops[indexPath.row]
+        cell.textLabel?.text = stop.name
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
