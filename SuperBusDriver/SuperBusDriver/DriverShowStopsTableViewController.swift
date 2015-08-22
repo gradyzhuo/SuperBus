@@ -9,12 +9,13 @@
 import UIKit
 import Alamofire
 
-let bus311 = Bus(name: "311", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", description: "311-Ray的")
-
-
-struct Stop {
+struct Stop : Equatable {
     let name:String
-    let bus:Bus
+    var stop:Bool = false
+}
+
+func ==(lhs: Stop, rhs: Stop)->Bool{
+    return lhs.name == rhs.name
 }
 
 struct Bus : Printable {
@@ -36,7 +37,7 @@ struct Bus : Printable {
     
     let description:String
     
-    init(name: String, proximityUUID: String, lowProximityUUID:String? = nil, soundName: String? = nil, description:String? = nil){
+    init(name: String, proximityUUID: String, lowProximityUUID:String? = nil, soundName: String? = nil, description:String? = nil, stops:[Stop] = []){
         
         self.name = name
         self.proximityUUID = proximityUUID
@@ -44,6 +45,13 @@ struct Bus : Printable {
         self.soundName = soundName ?? "\(name).aiff"
         self.identifier = name
         self.description = description ?? name
+        self.stops = stops
+        
+    }
+    
+    
+    mutating func updateStops(stops:[Stop]){
+        self.stops = stops
     }
     
 }
@@ -51,12 +59,17 @@ struct Bus : Printable {
 
 class DriverShowStopsTableViewController: UITableViewController {
 
-    let currentBus:Bus = bus311
-    var stops:[Stop] = []
+    var currentBus:Bus!
+    var stopsToStop:[Stop] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let stopNames:[String] = ["中和高中", "連城路", "台貿一村"]
+        let stops:[Stop] = stopNames.map{ return Stop(name: $0, stop: true) }
+        var bus311 = Bus(name: "311", proximityUUID: "EE188576-DC99-4BB5-97A4-138C9DF7E51D", stops: stops)
+        self.currentBus = bus311
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -73,8 +86,6 @@ class DriverShowStopsTableViewController: UITableViewController {
 //            })
 //            
 //        }
-        
-        var stops = [Stop(name: "中和廟口", bus: currentBus)]
         
         self.tableView.reloadData()
         
@@ -96,7 +107,7 @@ class DriverShowStopsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.stops.count
+        return self.currentBus.stops.count
     }
 
     
@@ -104,8 +115,14 @@ class DriverShowStopsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("stop", forIndexPath: indexPath) as! UITableViewCell
         
         // Configure the cell...
-        let stop = self.stops[indexPath.row]
+        let stop = self.currentBus.stops[indexPath.row]
         cell.textLabel?.text = stop.name
+        
+        cell.accessoryView = nil
+        if stop.stop {
+            cell.accessoryView = UIImageView(image: UIImage(named: "stop"))
+        }
+        
         
         return cell
     }
