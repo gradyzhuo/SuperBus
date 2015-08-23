@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import AVFoundation
 
-struct Bus : Printable {
+struct Bus : Printable, Equatable {
     let name:String
     let proximityUUID:String
     let lowProximityUUID:String
@@ -36,6 +36,15 @@ struct Bus : Printable {
         self.description = description ?? name
     }
     
+}
+
+
+func ==(lhs:Bus, rhs:Bus)->Bool{
+    return lhs.identifier == rhs.identifier
+}
+
+func ==(lhs:Bus, rhs:String)->Bool{
+    return lhs.identifier == rhs
 }
 
 extension CLRegionState : Printable {
