@@ -38,8 +38,8 @@ struct Bus : Printable, Equatable {
         self.name = name
         self.proximityUUID = proximityUUID
         self.lowProximityUUID = lowProximityUUID ?? proximityUUID
-        self.enterSoundName = soundName ?? "\(name)_enter.aiff"
-        self.leaveSoundName = soundName ?? "\(name)_leave.aiff"
+        self.enterSoundName = soundName ?? "\(name)-enter.aiff"
+        self.leaveSoundName = soundName ?? "\(name)-leave.aiff"
         self.identifier = name
         self.description = description ?? name
     }
