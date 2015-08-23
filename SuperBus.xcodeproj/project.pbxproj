@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		715B12F31B897E4100A563E7 /* 109-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12F11B897E4100A563E7 /* 109-enter.aiff */; };
+		715B12F41B897E4100A563E7 /* 109-leave.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12F21B897E4100A563E7 /* 109-leave.aiff */; };
+		715B12F71B897E7300A563E7 /* 311-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12F51B897E7300A563E7 /* 311-enter.aiff */; };
+		715B12F81B897E7300A563E7 /* 311-leave.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12F61B897E7300A563E7 /* 311-leave.aiff */; };
+		715B12FB1B897EEB00A563E7 /* 綠13-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12F91B897EEB00A563E7 /* 綠13-enter.aiff */; };
+		715B12FC1B897EEB00A563E7 /* 綠13-leave.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12FA1B897EEB00A563E7 /* 綠13-leave.aiff */; };
 		71B94D301B88AB3D00BD6D37 /* BusListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */; };
 		71B94D321B88AB8D00BD6D37 /* GetOffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B94D311B88AB8D00BD6D37 /* GetOffController.swift */; };
 		792BA3361B885DB200F59D43 /* 201.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 792BA0C11B885DAF00F59D43 /* 201.aiff */; };
@@ -662,6 +668,12 @@
 
 /* Begin PBXFileReference section */
 		3A9593ED88D1079B679E55A8 /* Pods-SuperBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBus.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBus/Pods-SuperBus.release.xcconfig"; sourceTree = "<group>"; };
+		715B12F11B897E4100A563E7 /* 109-enter.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "109-enter.aiff"; sourceTree = "<group>"; };
+		715B12F21B897E4100A563E7 /* 109-leave.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "109-leave.aiff"; sourceTree = "<group>"; };
+		715B12F51B897E7300A563E7 /* 311-enter.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "311-enter.aiff"; sourceTree = "<group>"; };
+		715B12F61B897E7300A563E7 /* 311-leave.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "311-leave.aiff"; sourceTree = "<group>"; };
+		715B12F91B897EEB00A563E7 /* 綠13-enter.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "綠13-enter.aiff"; sourceTree = "<group>"; };
+		715B12FA1B897EEB00A563E7 /* 綠13-leave.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "綠13-leave.aiff"; sourceTree = "<group>"; };
 		71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusListController.swift; sourceTree = "<group>"; };
 		71B94D311B88AB8D00BD6D37 /* GetOffController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetOffController.swift; sourceTree = "<group>"; };
 		792BA0C11B885DAF00F59D43 /* 201.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 201.aiff; sourceTree = "<group>"; };
@@ -1339,6 +1351,12 @@
 		792BA0C01B885DAF00F59D43 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				715B12F91B897EEB00A563E7 /* 綠13-enter.aiff */,
+				715B12FA1B897EEB00A563E7 /* 綠13-leave.aiff */,
+				715B12F51B897E7300A563E7 /* 311-enter.aiff */,
+				715B12F61B897E7300A563E7 /* 311-leave.aiff */,
+				715B12F11B897E4100A563E7 /* 109-enter.aiff */,
+				715B12F21B897E4100A563E7 /* 109-leave.aiff */,
 				792BA0C11B885DAF00F59D43 /* 201.aiff */,
 				792BA0C21B885DAF00F59D43 /* 231.aiff */,
 				792BA0C31B885DAF00F59D43 /* 241.aiff */,
@@ -2151,6 +2169,7 @@
 				792BA3AB1B885DB200F59D43 /* 847區.aiff in Resources */,
 				792BA4F51B885DB200F59D43 /* F811虎豹潭返.aiff in Resources */,
 				792BA4A41B885DB200F59D43 /* F316返.aiff in Resources */,
+				715B12F81B897E7300A563E7 /* 311-leave.aiff in Resources */,
 				792BA5A41B885DB200F59D43 /* 藍44延.aiff in Resources */,
 				792BA3701B885DB200F59D43 /* 788去海科館.aiff in Resources */,
 				792BA5961B885DB200F59D43 /* 藍31.aiff in Resources */,
@@ -2222,6 +2241,7 @@
 				792BA5101B885DB200F59D43 /* F906去.aiff in Resources */,
 				792BA54A1B885DB200F59D43 /* 七堵-十分天燈.aiff in Resources */,
 				792BA43C1B885DB200F59D43 /* F133末班.aiff in Resources */,
+				715B12F31B897E4100A563E7 /* 109-enter.aiff in Resources */,
 				792BA3B41B885DB200F59D43 /* 860.aiff in Resources */,
 				792BA38F1B885DB200F59D43 /* 813.aiff in Resources */,
 				792BA5A51B885DB200F59D43 /* 藍45.aiff in Resources */,
@@ -2290,6 +2310,7 @@
 				792BA4AA1B885DB200F59D43 /* F511.aiff in Resources */,
 				792BA4E81B885DB200F59D43 /* F802返.aiff in Resources */,
 				792BA57F1B885DB200F59D43 /* 綠12.aiff in Resources */,
+				715B12FB1B897EEB00A563E7 /* 綠13-enter.aiff in Resources */,
 				792BA4101B885DB200F59D43 /* 982.aiff in Resources */,
 				792BA3CB1B885DB200F59D43 /* 875.aiff in Resources */,
 				792BA5611B885DB200F59D43 /* 橘22.aiff in Resources */,
@@ -2299,6 +2320,7 @@
 				792BA3BB1B885DB200F59D43 /* 864.aiff in Resources */,
 				792BA4DF1B885DB200F59D43 /* F711返.aiff in Resources */,
 				792BA42F1B885DB200F59D43 /* F123-1550.aiff in Resources */,
+				715B12F41B897E4100A563E7 /* 109-leave.aiff in Resources */,
 				792BA5701B885DB200F59D43 /* 紅23.aiff in Resources */,
 				792BA49D1B885DB200F59D43 /* F311返.aiff in Resources */,
 				792BA3FE1B885DB200F59D43 /* 935.aiff in Resources */,
@@ -2544,6 +2566,7 @@
 				792BA4481B885DB200F59D43 /* F151-0730.aiff in Resources */,
 				792BA3731B885DB200F59D43 /* 789.aiff in Resources */,
 				792BA4581B885DB200F59D43 /* F152-1700.aiff in Resources */,
+				715B12FC1B897EEB00A563E7 /* 綠13-leave.aiff in Resources */,
 				792BA4D41B885DB200F59D43 /* F702去.aiff in Resources */,
 				792BA55E1B885DB200F59D43 /* 橘2.aiff in Resources */,
 				792BA4681B885DB200F59D43 /* F203.aiff in Resources */,
@@ -2588,6 +2611,7 @@
 				792BA4291B885DB200F59D43 /* F111新民返.aiff in Resources */,
 				792BA4A11B885DB200F59D43 /* F315-09-12.aiff in Resources */,
 				792BA3841B885DB200F59D43 /* 802.aiff in Resources */,
+				715B12F71B897E7300A563E7 /* 311-enter.aiff in Resources */,
 				792BA4771B885DB200F59D43 /* F217.aiff in Resources */,
 				792BA33A1B885DB200F59D43 /* 243.aiff in Resources */,
 				792BA56D1B885DB200F59D43 /* 紅13.aiff in Resources */,
