@@ -61,7 +61,7 @@ class GetOffController: UITableViewController {
 
         getOffIndex = indexPath.row
         tableView.reloadData()
-        Alamofire.request(.POST, "http://52.25.36.29/rest/bus/EE188576-DC99-4BB5-97A4-138C9DF7E51D", parameters: ["stops": stations311[indexPath.row]])
+        Alamofire.request(.POST, "http://52.25.36.29/rest/bus/EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", parameters: ["stops": stations311[indexPath.row]])
             .responseJSON { (_, _, JSON, _) in
                 println(JSON)
                 
