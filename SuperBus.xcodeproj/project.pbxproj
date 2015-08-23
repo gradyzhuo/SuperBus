@@ -646,6 +646,8 @@
 		79998E951B872B0A00B1080E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79998E931B872B0A00B1080E /* LaunchScreen.xib */; };
 		79998EA11B872B0B00B1080E /* SuperBusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79998EA01B872B0B00B1080E /* SuperBusTests.swift */; };
 		79B59ECB1B896A700052AAE9 /* AvailableBusesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B59ECA1B896A700052AAE9 /* AvailableBusesList.swift */; };
+		79B59ECE1B897BD90052AAE9 /* 311-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 79B59ECC1B897BD90052AAE9 /* 311-enter.aiff */; };
+		79B59ECF1B897BD90052AAE9 /* 311-leave.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 79B59ECD1B897BD90052AAE9 /* 311-leave.aiff */; };
 		79E47CB71B88A0E80080E2B8 /* BusesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E47CB61B88A0E80080E2B8 /* BusesManager.swift */; };
 		C9ACAAA21FA318646C41E043 /* Pods_SuperBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB24A1EB87E21C87B6DAC27 /* Pods_SuperBus.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -1304,6 +1306,8 @@
 		79998E9F1B872B0B00B1080E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79998EA01B872B0B00B1080E /* SuperBusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperBusTests.swift; sourceTree = "<group>"; };
 		79B59ECA1B896A700052AAE9 /* AvailableBusesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableBusesList.swift; sourceTree = "<group>"; };
+		79B59ECC1B897BD90052AAE9 /* 311-enter.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "311-enter.aiff"; sourceTree = "<group>"; };
+		79B59ECD1B897BD90052AAE9 /* 311-leave.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "311-leave.aiff"; sourceTree = "<group>"; };
 		79E47CB61B88A0E80080E2B8 /* BusesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusesManager.swift; sourceTree = "<group>"; };
 		8AB24A1EB87E21C87B6DAC27 /* Pods_SuperBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SuperBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF2CE8815A46AFB3A46C81BA /* Pods-SuperBus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBus/Pods-SuperBus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1339,6 +1343,8 @@
 		792BA0C01B885DAF00F59D43 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				79B59ECC1B897BD90052AAE9 /* 311-enter.aiff */,
+				79B59ECD1B897BD90052AAE9 /* 311-leave.aiff */,
 				792BA0C11B885DAF00F59D43 /* 201.aiff */,
 				792BA0C21B885DAF00F59D43 /* 231.aiff */,
 				792BA0C31B885DAF00F59D43 /* 241.aiff */,
@@ -2393,8 +2399,10 @@
 				792BA4441B885DB200F59D43 /* F138新古庄區.aiff in Resources */,
 				792BA35B1B885DB200F59D43 /* 678.aiff in Resources */,
 				792BA4F01B885DB200F59D43 /* F807祖師廟.aiff in Resources */,
+				79B59ECF1B897BD90052AAE9 /* 311-leave.aiff in Resources */,
 				792BA5451B885DB200F59D43 /* F932-13:00.aiff in Resources */,
 				792BA5201B885DB200F59D43 /* F913返.aiff in Resources */,
+				79B59ECE1B897BD90052AAE9 /* 311-enter.aiff in Resources */,
 				792BA48E1B885DB200F59D43 /* F237副去.aiff in Resources */,
 				792BA4D71B885DB200F59D43 /* F703前三班.aiff in Resources */,
 				792BA4DA1B885DB200F59D43 /* F705.aiff in Resources */,

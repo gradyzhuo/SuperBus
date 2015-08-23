@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let buses:[String:Bus] = [
             "311":Bus(name: "311", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE"),
-            "綠13":Bus(name: "綠13", proximityUUID: "C26D9218-F004-4D66-9A56-4CCD405E16B6"),
-            "109":Bus(name: "109", proximityUUID: "FDA50693-A4E2-4FB1-AFCF-C6EB07647825")
+            "綠13":Bus(name: "綠13", proximityUUID: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
+            "109":Bus(name: "109", proximityUUID: "CCCCCCCC-CCCC-CCCC-CCCCCCCCCCCC")
         ]
         
         for (key, value) in buses {
