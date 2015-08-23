@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let buses:[String:Bus] = [
             "311":Bus(name: "311", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE"),
             "綠13":Bus(name: "綠13", proximityUUID: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
-            "109":Bus(name: "109", proximityUUID: "CCCCCCCC-CCCC-CCCC-CCCCCCCCCCCC")
+            "109":Bus(name: "109", proximityUUID: "11111111-1111-1111-1111-111111111111")
         ]
         
         for (key, value) in buses {
