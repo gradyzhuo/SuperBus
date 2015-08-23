@@ -14,14 +14,21 @@ struct Bus : Printable, Equatable {
     let name:String
     let proximityUUID:String
     let lowProximityUUID:String
-    let soundName:String
+    
     let identifier:String
     
     let major:Int = 1
     let minor:Int = 1
     
-    var alertBody:String{
+    var enterAlertBody:String{
         return self.description + "公車到了"
+    }
+    
+    let enterSoundName:String
+    let leaveSoundName:String
+    
+    var leaveAlertBody:String{
+        return self.description + "公車離開了"
     }
     
     let description:String
@@ -31,7 +38,8 @@ struct Bus : Printable, Equatable {
         self.name = name
         self.proximityUUID = proximityUUID
         self.lowProximityUUID = lowProximityUUID ?? proximityUUID
-        self.soundName = soundName ?? "\(name).aiff"
+        self.enterSoundName = soundName ?? "\(name)_enter.aiff"
+        self.leaveSoundName = soundName ?? "\(name)_leave.aiff"
         self.identifier = name
         self.description = description ?? name
     }
@@ -122,8 +130,8 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
         
         if let bus = self.registeredBuses[region.identifier] {
             let notification = UILocalNotification()
-            notification.alertBody = bus.alertBody
-            notification.soundName = bus.soundName
+            notification.alertBody = bus.enterAlertBody
+            notification.soundName = bus.enterSoundName
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
         
@@ -133,15 +141,10 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
         
         if let bus = self.registeredBuses[region.identifier] {
             let notification = UILocalNotification()
-            notification.alertBody = bus.name + "公車離開了"
-            notification.soundName = bus.soundName
+            notification.alertBody = bus.leaveAlertBody
+            notification.soundName = bus.leaveSoundName
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
-        
-        let speech = AVSpeechSynthesizer()
-        let utterace = AVSpeechUtterance(string: "機車勒")
-        utterace.rate = 0.3
-        speech.speakUtterance(utterace)
         
     }
     
