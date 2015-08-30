@@ -8,6 +8,12 @@
 
 import UIKit
 import CoreData
+//
+//let buses:[String:Bus] = [
+//    "311":Bus(name: "311", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", major:311, minor: 0),
+//    "綠13":Bus(name: "綠13", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", major:1013, minor: 0),
+//    "109":Bus(name: "109", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", major:109, minor: 0)
+//]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,20 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let type = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+        let type: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Sound]
         let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
         application.registerUserNotificationSettings(setting)
 
         
-        let buses:[String:Bus] = [
-            "311":Bus(name: "311", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE"),
-            "綠13":Bus(name: "綠13", proximityUUID: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
-            "109":Bus(name: "109", proximityUUID: "11111111-1111-1111-1111-111111111111")
-        ]
-        
-        for (key, value) in buses {
-            BusesManager.sharedInstance.detectBeaconRegionWithBus(value)
-        }
+//        for (_, value) in buses {
+//            BusesManager.sharedInstance.detectBeaconRegionWithBus(value)
+//        }
         
         return true
     }
@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.cityhacker.SuperBus" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -132,7 +132,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SuperBus.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -144,6 +147,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
         
         return coordinator
@@ -165,11 +170,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                } catch let error1 as NSError {
+                    error = error1
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                }
             }
         }
     }

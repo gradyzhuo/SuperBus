@@ -45,7 +45,7 @@ class GetOffController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("busStop", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("busStop", forIndexPath: indexPath) 
 
         // Configure the cell...
         cell.textLabel?.text = stations311[indexPath.row]
@@ -62,8 +62,7 @@ class GetOffController: UITableViewController {
         getOffIndex = indexPath.row
         tableView.reloadData()
         Alamofire.request(.POST, "http://52.25.36.29/rest/bus/EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", parameters: ["stops": stations311[indexPath.row]])
-            .responseJSON { (_, _, JSON, _) in
-                println(JSON)
+            .responseJSON { (_, _, JSON) -> Void in
                 
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 import CoreLocation
 
-class ViewController: UITableViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UITableViewController, CLLocationManagerDelegate{
 
     var locationManager: CLLocationManager!
     
@@ -42,11 +42,11 @@ class ViewController: UITableViewController, CLLocationManagerDelegate, UITableV
 
     // delegates
     
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!)
+    func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion)
     {
-        var controller = UIAlertController(title: "Found beacon", message: "yay", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(paramAction:UIAlertAction!) in
-            println("OK Tapped")
+        let controller = UIAlertController(title: "Found beacon", message: "yay", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(paramAction:UIAlertAction) in
+            print("OK Tapped")
         })
         controller.addAction(action)
     }

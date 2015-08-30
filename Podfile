@@ -4,7 +4,8 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'SuperBus' do
-pod 'Alamofire', '~> 1.3'
+#pod 'Alamofire', '~> 2.0-beta'
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift-2.0'
 
 end
 

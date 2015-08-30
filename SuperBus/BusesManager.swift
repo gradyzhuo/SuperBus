@@ -10,15 +10,15 @@ import UIKit
 import CoreLocation
 import AVFoundation
 
-struct Bus : Printable, Equatable {
+struct Bus : CustomStringConvertible, Equatable {
     let name:String
-    let proximityUUID:String
-    let lowProximityUUID:String
+    let proximityUUID:NSUUID
+//    let lowProximityUUID:NSUUID
     
     let identifier:String
     
-    let major:Int = 1
-    let minor:Int = 1
+    var major:CLBeaconMajorValue = 1
+    var minor:CLBeaconMinorValue = 1
     
     var enterAlertBody:String{
         return self.description + "公車到了"
@@ -33,29 +33,34 @@ struct Bus : Printable, Equatable {
     
     let description:String
     
-    init(name: String, proximityUUID: String, lowProximityUUID:String? = nil, soundName: String? = nil, description:String? = nil){
+    init(name: String, proximityUUID: NSUUID, soundName: String? = nil, description:String? = nil, major:CLBeaconMajorValue = 1, minor:CLBeaconMinorValue = 1){
         
         self.name = name
         self.proximityUUID = proximityUUID
-        self.lowProximityUUID = lowProximityUUID ?? proximityUUID
+//        self.lowProximityUUID = lowProximityUUID ?? proximityUUID
         self.enterSoundName = soundName ?? "\(name)-enter.aiff"
         self.leaveSoundName = soundName ?? "\(name)-leave.aiff"
         self.identifier = name
         self.description = description ?? name
+        self.major = major
+        self.minor = minor
+    }
+    
+    init(name: String, proximityUUID: String, soundName: String? = nil, description:String? = nil, major:CLBeaconMajorValue = 1, minor:CLBeaconMinorValue = 1){
+        self = Bus(name: name, proximityUUID: NSUUID(UUIDString: proximityUUID) ?? NSUUID(), soundName: soundName, description: description, major: major, minor: minor)
     }
     
 }
 
-
 func ==(lhs:Bus, rhs:Bus)->Bool{
-    return lhs.identifier == rhs.identifier
+    return lhs.proximityUUID == rhs.proximityUUID && lhs.major == rhs.major && lhs.minor == rhs.minor
 }
 
 func ==(lhs:Bus, rhs:String)->Bool{
     return lhs.identifier == rhs
 }
 
-extension CLRegionState : Printable {
+extension CLRegionState : CustomStringConvertible {
     
     public var description:String{
         switch self{
@@ -111,22 +116,35 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
         
         self.registeredBuses[bus.identifier] = bus
         
-        let UUID = NSUUID(UUIDString: bus.proximityUUID)
-        let region = CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
+//        let UUID = NSUUID(UUIDString: bus.proximityUUID) ?? NSUUID()
+        let region = CLBeaconRegion(proximityUUID: bus.proximityUUID, major: bus.major, minor: bus.minor, identifier: bus.identifier)//CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
         region.notifyEntryStateOnDisplay = true
         
         self.locationManager.startMonitoringForRegion(region)
         self.locationManager.startRangingBeaconsInRegion(region)
     }
     
+    func undetectBeaconRegionWithBus(bus:Bus){
+        
+        self.registeredBuses.removeValueForKey(bus.identifier)
+        
+//        let UUID = NSUUID(UUIDString: bus.proximityUUID) ?? NSUUID()
+        let region = CLBeaconRegion(proximityUUID: bus.proximityUUID, major: bus.major, minor: bus.minor, identifier: bus.identifier)//CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
+        region.notifyEntryStateOnDisplay = true
+        
+        self.locationManager.stopMonitoringForRegion(region)
+        self.locationManager.stopRangingBeaconsInRegion(region)
+    }
+    
     //delegate
     
-    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+    func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
         //
+        print("beacons:\(beacons)")
     }
     
     
-    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         
         if let bus = self.registeredBuses[region.identifier] {
             let notification = UILocalNotification()
@@ -137,7 +155,7 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
         
     }
     
-    func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
         
         if let bus = self.registeredBuses[region.identifier] {
             let notification = UILocalNotification()
@@ -149,7 +167,7 @@ class BusesManager : NSObject, CLLocationManagerDelegate{
     }
     
     
-    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
+    func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
         
     }
 

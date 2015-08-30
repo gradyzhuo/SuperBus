@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class BusListController: UITableViewController {
 
-    let busList = ["0南", "109", "207", "253", "280", "284", "290", "311", "505", "52", "530", "642", "643", "668", "671", "675", "676", "907", "敦化幹線", "棕11", "綠11"]
+    let busList = availableBusesList//["0南", "109", "207", "253", "280", "284", "290", "311", "505", "52", "530", "642", "643", "668", "671", "675", "676", "907", "敦化幹線", "棕11", "綠11"]
+    
+    var takenBus:[Bus] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +23,29 @@ class BusListController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+        self.reloadTakenBuses()
+        
+    }
+    
+    
+    func reloadTakenBuses(){
+        self.takenBus = BusesManager.sharedInstance.locationManager.monitoredRegions.map { (element:CLRegion) -> Bus in
+            let region = element as! CLBeaconRegion
+            return Bus(name: "", proximityUUID: region.proximityUUID, major: CLBeaconMajorValue(region.major?.integerValue ?? 0), minor: CLBeaconMinorValue(region.minor?.integerValue ?? 0))
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func createTakenButton(bus:Bus)->TakenButton{
+        let button = TakenButton(bus: bus)
+        button.setImage(UIImage(named: "take"), forState: UIControlState.Normal)
+        button.addTarget(self, action: "deleteBus:", forControlEvents: UIControlEvents.TouchUpInside)
+        return button
     }
 
     // MARK: - Table view data source
@@ -43,14 +64,44 @@ class BusListController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("busLine", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("busLine", forIndexPath: indexPath) 
 
         // Configure the cell...
-        cell.textLabel?.text = busList[indexPath.row]
+        let bus = busList[indexPath.row]
+        cell.textLabel?.text = bus.name
+        
+        cell.accessoryView = nil
+        if self.takenBus.contains(bus){
+            cell.accessoryView = self.createTakenButton(bus)
+        }
+        
         return cell
     }
     
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let bus = busList[indexPath.row]
+        BusesManager.sharedInstance.detectBeaconRegionWithBus(bus)
+        
+        
+        let button = self.createTakenButton(bus)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.accessoryView = button
+        
+        self.reloadTakenBuses()
+        self.tableView.reloadData()
+    }
+    
+    func deleteBus(sender: AnyObject){
+        let button = sender as! TakenButton
+        let bus = button.bus
+        
+        BusesManager.sharedInstance.undetectBeaconRegionWithBus(bus)
+        self.reloadTakenBuses()
+        self.tableView.reloadData()
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
