@@ -11,9 +11,7 @@ import CoreLocation
 
 class BusListController: UITableViewController {
 
-    let busList = availableBusesList//["0南", "109", "207", "253", "280", "284", "290", "311", "505", "52", "530", "642", "643", "668", "671", "675", "676", "907", "敦化幹線", "棕11", "綠11"]
-    
-    var takenBus:[Bus] = []
+    var busList:[Route] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,17 +21,11 @@ class BusListController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-        self.reloadTakenBuses()
-        
-    }
-    
-    
-    func reloadTakenBuses(){
-        self.takenBus = BusesManager.sharedInstance.locationManager.monitoredRegions.map { (element:CLRegion) -> Bus in
-            let region = element as! CLBeaconRegion
-            return Bus(name: "", proximityUUID: region.proximityUUID, major: CLBeaconMajorValue(region.major?.integerValue ?? 0), minor: CLBeaconMinorValue(region.minor?.integerValue ?? 0))
+        RoutesDataSource.availableRoutesWithLocation(CLLocation()) { (routes) -> Void in
+            self.busList = routes
+            self.tableView.reloadData()
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +33,7 @@ class BusListController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func createTakenButton(bus:Bus)->TakenButton{
+    func createTakenButton(bus:Route)->TakenButton{
         let button = TakenButton(bus: bus)
         button.setImage(UIImage(named: "take"), forState: UIControlState.Normal)
         button.addTarget(self, action: "deleteBus:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -71,7 +63,7 @@ class BusListController: UITableViewController {
         cell.textLabel?.text = bus.name
         
         cell.accessoryView = nil
-        if self.takenBus.contains(bus){
+        if RoutesManager.sharedInstance.registeredRoutes.contains(bus){
             cell.accessoryView = self.createTakenButton(bus)
         }
         
@@ -82,14 +74,12 @@ class BusListController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let bus = busList[indexPath.row]
-        BusesManager.sharedInstance.detectBeaconRegionWithBus(bus)
-        
+        RoutesManager.sharedInstance.detectBeaconRegionWithBus(bus)
         
         let button = self.createTakenButton(bus)
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryView = button
         
-        self.reloadTakenBuses()
         self.tableView.reloadData()
     }
     
@@ -97,8 +87,7 @@ class BusListController: UITableViewController {
         let button = sender as! TakenButton
         let bus = button.bus
         
-        BusesManager.sharedInstance.undetectBeaconRegionWithBus(bus)
-        self.reloadTakenBuses()
+        RoutesManager.sharedInstance.undetectBeaconRegionWithBus(bus)
         self.tableView.reloadData()
     }
     

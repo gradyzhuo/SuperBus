@@ -8,12 +8,6 @@
 
 import UIKit
 import CoreData
-//
-//let buses:[String:Bus] = [
-//    "311":Bus(name: "311", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", major:311, minor: 0),
-//    "綠13":Bus(name: "綠13", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", major:1013, minor: 0),
-//    "109":Bus(name: "109", proximityUUID: "EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE", major:109, minor: 0)
-//]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,66 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let type: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Sound]
         let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
         application.registerUserNotificationSettings(setting)
-
         
-//        for (_, value) in buses {
-//            BusesManager.sharedInstance.detectBeaconRegionWithBus(value)
-//        }
+        RoutesManager.sharedInstance.startRaning()
         
         return true
     }
 
-//    func register(){
-//        
-//        for (key, value) in buses {
-//            self.detectBeaconRegionWithBus(value)
-//        }
-//        
-//    }
-//    
-//    func detectBeaconRegionWithBus(bus:Bus){
-//        
-//        let UUID = NSUUID(UUIDString: bus.proximityUUID)
-//        let region = CLBeaconRegion(proximityUUID: UUID, identifier: bus.identifier)
-//        region.notifyEntryStateOnDisplay = true
-//        
-//        self.locationManager.startMonitoringForRegion(region)
-//        self.locationManager.startRangingBeaconsInRegion(region)
-//    }
-//    
-//    
-//    func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-//        //
-//    }
-//    
-//    
-//    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
-//        
-//        if let bus = buses[region.identifier] {
-//            let notification = UILocalNotification()
-//            notification.alertBody = bus.alertBody
-//            notification.soundName = bus.soundName
-//            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-//        }
-//        
-//        
-//        
-//    }
-//    
-//    func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-//        
-//        if let bus = buses[region.identifier] {
-//            let notification = UILocalNotification()
-//            notification.alertBody = bus.name + "公車離開了"
-//            notification.soundName = bus.soundName
-//            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-//        }
-//    }
-//    
-//    
-//    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
-//        
-//    }
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

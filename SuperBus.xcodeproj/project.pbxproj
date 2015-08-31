@@ -15,8 +15,13 @@
 		715B12FC1B897EEB00A563E7 /* 綠13-leave.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 715B12FA1B897EEB00A563E7 /* 綠13-leave.aiff */; };
 		71B94D301B88AB3D00BD6D37 /* BusListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */; };
 		71B94D321B88AB8D00BD6D37 /* GetOffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B94D311B88AB8D00BD6D37 /* GetOffController.swift */; };
+		790D1D6E1B94C68F00612A41 /* 綠5-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 790D1D6D1B94C68F00612A41 /* 綠5-enter.aiff */; settings = {ASSET_TAGS = (); }; };
+		790D1D6F1B94C68F00612A41 /* 綠5-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 790D1D6D1B94C68F00612A41 /* 綠5-enter.aiff */; settings = {ASSET_TAGS = (); }; };
+		790D1D711B94C6AF00612A41 /* 942-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 790D1D701B94C6AF00612A41 /* 942-enter.aiff */; settings = {ASSET_TAGS = (); }; };
+		790D1D721B94C6AF00612A41 /* 942-enter.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 790D1D701B94C6AF00612A41 /* 942-enter.aiff */; settings = {ASSET_TAGS = (); }; };
 		792BA4171B885DB200F59D43 /* busList.json in Resources */ = {isa = PBXBuildFile; fileRef = 792BA1A21B885DAF00F59D43 /* busList.json */; };
 		7981443C1B935B9C0038E290 /* TakenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7981443B1B935B9C0038E290 /* TakenButton.swift */; settings = {ASSET_TAGS = (); }; };
+		7981446A1B943B640038E290 /* RoutesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798144691B943B640038E290 /* RoutesDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		799622571B934A500031CC7A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799622551B934A500031CC7A /* Interface.storyboard */; };
 		799622591B934A500031CC7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799622581B934A500031CC7A /* Assets.xcassets */; };
 		799622601B934A500031CC7A /* Beabus Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7996225F1B934A500031CC7A /* Beabus Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -42,13 +47,11 @@
 		799622911B934D3B0031CC7A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799622901B934D3B0031CC7A /* CoreBluetooth.framework */; };
 		79998E891B872B0A00B1080E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79998E881B872B0A00B1080E /* AppDelegate.swift */; };
 		79998E8B1B872B0A00B1080E /* SuperBus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79998E8A1B872B0A00B1080E /* SuperBus.xcdatamodeld */; };
-		79998E8D1B872B0A00B1080E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79998E8C1B872B0A00B1080E /* ViewController.swift */; };
 		79998E901B872B0A00B1080E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79998E8E1B872B0A00B1080E /* Main.storyboard */; };
 		79998E921B872B0A00B1080E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79998E911B872B0A00B1080E /* Images.xcassets */; };
 		79998E951B872B0A00B1080E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79998E931B872B0A00B1080E /* LaunchScreen.xib */; };
 		79998EA11B872B0B00B1080E /* SuperBusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79998EA01B872B0B00B1080E /* SuperBusTests.swift */; };
-		79B59ECB1B896A700052AAE9 /* AvailableBusesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B59ECA1B896A700052AAE9 /* AvailableBusesList.swift */; };
-		79E47CB71B88A0E80080E2B8 /* BusesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E47CB61B88A0E80080E2B8 /* BusesManager.swift */; };
+		79E47CB71B88A0E80080E2B8 /* RoutesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E47CB61B88A0E80080E2B8 /* RoutesManager.swift */; };
 		C9ACAAA21FA318646C41E043 /* Pods_SuperBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB24A1EB87E21C87B6DAC27 /* Pods_SuperBus.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -111,8 +114,11 @@
 		715B12FA1B897EEB00A563E7 /* 綠13-leave.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "綠13-leave.aiff"; sourceTree = "<group>"; };
 		71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusListController.swift; sourceTree = "<group>"; };
 		71B94D311B88AB8D00BD6D37 /* GetOffController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetOffController.swift; sourceTree = "<group>"; };
+		790D1D6D1B94C68F00612A41 /* 綠5-enter.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "綠5-enter.aiff"; sourceTree = "<group>"; };
+		790D1D701B94C6AF00612A41 /* 942-enter.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "942-enter.aiff"; sourceTree = "<group>"; };
 		792BA1A21B885DAF00F59D43 /* busList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = busList.json; sourceTree = "<group>"; };
 		7981443B1B935B9C0038E290 /* TakenButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakenButton.swift; sourceTree = "<group>"; };
+		798144691B943B640038E290 /* RoutesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesDataSource.swift; sourceTree = "<group>"; };
 		799622531B934A500031CC7A /* Beabus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beabus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		799622561B934A500031CC7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		799622581B934A500031CC7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,15 +136,13 @@
 		79998E841B872B0A00B1080E /* SuperBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79998E871B872B0A00B1080E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79998E881B872B0A00B1080E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		79998E8C1B872B0A00B1080E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79998E8F1B872B0A00B1080E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79998E911B872B0A00B1080E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79998E941B872B0A00B1080E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		79998E9A1B872B0B00B1080E /* SuperBusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperBusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79998E9F1B872B0B00B1080E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79998EA01B872B0B00B1080E /* SuperBusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperBusTests.swift; sourceTree = "<group>"; };
-		79B59ECA1B896A700052AAE9 /* AvailableBusesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableBusesList.swift; sourceTree = "<group>"; };
-		79E47CB61B88A0E80080E2B8 /* BusesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusesManager.swift; sourceTree = "<group>"; };
+		79E47CB61B88A0E80080E2B8 /* RoutesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesManager.swift; sourceTree = "<group>"; };
 		8AB24A1EB87E21C87B6DAC27 /* Pods_SuperBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SuperBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF2CE8815A46AFB3A46C81BA /* Pods-SuperBus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperBus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SuperBus/Pods-SuperBus.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,6 +186,8 @@
 		792BA0C01B885DAF00F59D43 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				790D1D701B94C6AF00612A41 /* 942-enter.aiff */,
+				790D1D6D1B94C68F00612A41 /* 綠5-enter.aiff */,
 				715B12F91B897EEB00A563E7 /* 綠13-enter.aiff */,
 				715B12FA1B897EEB00A563E7 /* 綠13-leave.aiff */,
 				715B12F51B897E7300A563E7 /* 311-enter.aiff */,
@@ -230,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				79998E881B872B0A00B1080E /* AppDelegate.swift */,
-				79998E8C1B872B0A00B1080E /* ViewController.swift */,
 				71B94D2F1B88AB3D00BD6D37 /* BusListController.swift */,
 				7981443B1B935B9C0038E290 /* TakenButton.swift */,
 				71B94D311B88AB8D00BD6D37 /* GetOffController.swift */,
@@ -238,9 +243,9 @@
 				79998E911B872B0A00B1080E /* Images.xcassets */,
 				79998E931B872B0A00B1080E /* LaunchScreen.xib */,
 				79998E8A1B872B0A00B1080E /* SuperBus.xcdatamodeld */,
-				79E47CB61B88A0E80080E2B8 /* BusesManager.swift */,
+				79E47CB61B88A0E80080E2B8 /* RoutesManager.swift */,
+				798144691B943B640038E290 /* RoutesDataSource.swift */,
 				79998E861B872B0A00B1080E /* Supporting Files */,
-				79B59ECA1B896A700052AAE9 /* AvailableBusesList.swift */,
 			);
 			path = SuperBus;
 			sourceTree = "<group>";
@@ -441,9 +446,11 @@
 				7996228B1B934A880031CC7A /* 綠13-leave.aiff in Resources */,
 				7996228C1B934A880031CC7A /* 311-enter.aiff in Resources */,
 				799622591B934A500031CC7A /* Assets.xcassets in Resources */,
+				790D1D721B94C6AF00612A41 /* 942-enter.aiff in Resources */,
 				799622571B934A500031CC7A /* Interface.storyboard in Resources */,
 				7996228A1B934A880031CC7A /* 綠13-enter.aiff in Resources */,
 				7996228E1B934A880031CC7A /* 109-enter.aiff in Resources */,
+				790D1D6F1B94C68F00612A41 /* 綠5-enter.aiff in Resources */,
 				7996228F1B934A880031CC7A /* 109-leave.aiff in Resources */,
 				7996228D1B934A880031CC7A /* 311-leave.aiff in Resources */,
 			);
@@ -467,8 +474,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790D1D6E1B94C68F00612A41 /* 綠5-enter.aiff in Resources */,
 				715B12F81B897E7300A563E7 /* 311-leave.aiff in Resources */,
 				79998E901B872B0A00B1080E /* Main.storyboard in Resources */,
+				790D1D711B94C6AF00612A41 /* 942-enter.aiff in Resources */,
 				79998E951B872B0A00B1080E /* LaunchScreen.xib in Resources */,
 				715B12F31B897E4100A563E7 /* 109-enter.aiff in Resources */,
 				79998E921B872B0A00B1080E /* Images.xcassets in Resources */,
@@ -555,13 +564,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				71B94D301B88AB3D00BD6D37 /* BusListController.swift in Sources */,
-				79998E8D1B872B0A00B1080E /* ViewController.swift in Sources */,
 				79998E8B1B872B0A00B1080E /* SuperBus.xcdatamodeld in Sources */,
 				7981443C1B935B9C0038E290 /* TakenButton.swift in Sources */,
-				79E47CB71B88A0E80080E2B8 /* BusesManager.swift in Sources */,
+				7981446A1B943B640038E290 /* RoutesDataSource.swift in Sources */,
+				79E47CB71B88A0E80080E2B8 /* RoutesManager.swift in Sources */,
 				79998E891B872B0A00B1080E /* AppDelegate.swift in Sources */,
 				71B94D321B88AB8D00BD6D37 /* GetOffController.swift in Sources */,
-				79B59ECB1B896A700052AAE9 /* AvailableBusesList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
